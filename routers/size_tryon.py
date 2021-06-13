@@ -78,7 +78,7 @@ async def api_get_result_tryon(iid:str, category:str, request: Request):
     elif cat == "TOP":
         data["id_ao"] = iid
         data["category_ao"] = value
-        if cache_PANTS == [] and cache_SKIRT == []:
+        if cache_PANTS == [] or cache_SKIRT == []:
             #image = plt.imread(src_result + "Top/IMG_{}.png".format(iid))
             shutil.copy(src_result + "Top/IMG_{}.png".format(iid),src_result + "result.png") 
 
@@ -95,16 +95,15 @@ async def api_get_result_tryon(iid:str, category:str, request: Request):
         if cache_SKIRT == []:
             shutil.copy(src_result + "Skirt/IMG_{}.png".format(iid),src_result + "result.png")
         cache_SKIRT.append(data["id_quan"])
-
     url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(data["id_ao"],data["category_ao"],data["id_quan"],data["category_quan"],data["body"])
+    print(url)
+    # response = requests.get(url="http://192.168.50.69:5849/4990/trousers/5013/long_sleeve_top/4985")
+    # result = response.content
+    # image = base64.b64decode(result.content)
+    # filename = 'static/public/anh-tach-nen//image.png'
     
-    response = requests.get(url="http://192.168.50.69:5849/4990/trousers/5013/long_sleeve_top/4985")
-    result = response.content
-    image = base64.b64decode(result.content)
-    filename = 'static/public/anh-tach-nen//image.png'
-    
-    with open(filename, 'wb') as f:
-         f.write(image)
+    # with open(filename, 'wb') as f:
+    #      f.write(image)
 
     message = "DONE!"
     return templates.TemplateResponse("tryon.html",{"request":request,"message":message})
