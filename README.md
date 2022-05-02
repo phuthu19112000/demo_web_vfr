@@ -12,4 +12,4 @@ pip install -r requirments.txt
 python main.py
 ``
 
-After run, navigate to localhost:9000 to view website
+After run, navigate to [localhost:9000](http://localhost:9000/) to view website
