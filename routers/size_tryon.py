@@ -34,10 +34,8 @@ cache_SKIRT = []
 
 
 
-def convert_to_file(result_image):
-    pass
-  
 
+  
 #SIZE FITTING
 @router.get("/products", response_class=HTMLResponse)
 async def api_fitsize(request: Request):
@@ -57,7 +55,6 @@ async def api_findsize(request: Request):
 @router.get("/tryon", response_class=HTMLResponse)
 async def tryon_page(request: Request):
     return templates.TemplateResponse("tryon.html",{"request":request})
-
 
 
 @router.get("/result")
@@ -96,7 +93,7 @@ async def api_get_result_tryon(iid:str, category:str, request: Request):
             shutil.copy(src_result + "Skirt/IMG_{}.png".format(iid),src_result + "result.png")
         cache_SKIRT.append(data["id_quan"])
     url = "http://192.168.50.69:5849/{}/{}/{}/{}/{}".format(data["id_ao"],data["category_ao"],data["id_quan"],data["category_quan"],data["body"])
-    print(url)
+
     # response = requests.get(url="http://192.168.50.69:5849/4990/trousers/5013/long_sleeve_top/4985")
     # result = response.content
     # image = base64.b64decode(result.content)
